@@ -4,6 +4,7 @@ const {connection}=require("./db")
 const { userRouter } = require("./routes/User.routes")
 const { auth } = require("./middleware/authentication")
 const { notesRouter } = require("./routes/Notes.route")
+require("dotenv").config()
 const cors=require("cors")
 app.use(cors())
 app.use(express.json())
@@ -16,7 +17,7 @@ app.get("/",(req,res)=>{
 
 app.use(auth)
 app.use("/notes",notesRouter)
-app.listen(8080,async()=>{
+app.listen(process.env.port,async()=>{
     try{
         await connection
         console.log("connected to the Database")
